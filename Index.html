@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html> _ _
+  < tête >
+    < titre > Page de connexion </ titre >
+  </ tête >
+  < corps >
+    < h1 > Se connecter </ h1 >
+    < formulaire >
+      < label  pour =" nom d'utilisateur " > Nom d'utilisateur : </ label >
+      < type d'entrée  =" texte " id =" nom d'utilisateur " nom =" nom d'utilisateur " requis > < br > < br >
+      < label  pour =" mot de passe " > Mot de passe : </ label >
+      < type d'entrée  =" mot de passe " id =" mot de passe " nom =" mot de passe " requis > < br > < br >
+      < type d'entrée  =" bouton " valeur =" Connexion " onclick =" connexion() " >
+    </ formulaire >
+
+    <script> _ _
+       connexion de fonction ( )  {
+        const  nom d'utilisateur  =  document . getElementById ( "nom d'utilisateur" ) . valeur ;
+        const  mot de passe  =  document . getElementById ( "mot de passe" ) . valeur ;
+
+        // Envoie la demande de connexion au serveur en utilisant AJAX
+        const  xhr  =  new  XMLHttpRequest ( ) ;
+        xhr . ouvrir ( "POST" ,  "/login" ,  true ) ;
+        xhr . setRequestHeader ( "Content-Type" ,  "application/json" ) ;
+        xhr . onreadystatechange  =  fonction ( )  {
+          if  ( xhr . readyState  ===  4 )  {
+            si  ( xhr . état  ===  200 )  {
+              // Rediriger vers le tableau de bord en cas de connexion réussie
+              fenêtre . emplacement . href  =  "/tableau de bord" ;
+            }  sinon  {
+              // Affiche un message d'erreur si la connexion échoue
+              alert ( "Nom d'utilisateur ou mot de passe invalide." ) ;
+            }
+          }
+        } ;
+        xhr . send ( JSON . stringify ( { nom d' utilisateur : nom d' utilisateur ,  mot de passe : mot de passe } ) ) ;
+      }
+    </script> _ _
+  </ corps >
+</html>
