@@ -1,40 +1,40 @@
-<!DOCTYPE html >
-<html> _ _
-  < tête >
-    < titre > Page de connexion </ titre >
-  </ tête >
-  < corps >
-    < h1 > Se connecter </ h1 >
-    < formulaire >
-      < label  pour =" nom d'utilisateur " > Nom d'utilisateur : </ label >
-      < type d'entrée  =" texte " id =" nom d'utilisateur " nom =" nom d'utilisateur " requis > < br > < br >
-      < label  pour =" mot de passe " > Mot de passe : </ label >
-      < type d'entrée  =" mot de passe " id =" mot de passe " nom =" mot de passe " requis > < br > < br >
-      < type d'entrée  =" bouton " valeur =" Connexion " onclick =" connexion() " >
-    </ formulaire >
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+      <input type="button" value="Login" onclick="login()">
+    </form>
 
-    <script> _ _
-       connexion de fonction ( )  {
-        const  nom d'utilisateur  =  document . getElementById ( "nom d'utilisateur" ) . valeur ;
-        const  mot de passe  =  document . getElementById ( "mot de passe" ) . valeur ;
+    <script>
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
 
-        // Envoie la demande de connexion au serveur en utilisant AJAX
-        const  xhr  =  new  XMLHttpRequest ( ) ;
-        xhr . ouvrir ( "POST" ,  "/login" ,  true ) ;
-        xhr . setRequestHeader ( "Content-Type" ,  "application/json" ) ;
-        xhr . onreadystatechange  =  fonction ( )  {
-          if  ( xhr . readyState  ===  4 )  {
-            si  ( xhr . état  ===  200 )  {
-              // Rediriger vers le tableau de bord en cas de connexion réussie
-              fenêtre . emplacement . href  =  "/tableau de bord" ;
-            }  sinon  {
-              // Affiche un message d'erreur si la connexion échoue
-              alert ( "Nom d'utilisateur ou mot de passe invalide." ) ;
+        // Send the login request to the server using AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/login", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              // Redirect to the dashboard on successful login
+              window.location.href = "/dashboard";
+            } else {
+              // Display an error message if the login fails
+              alert("Invalid username or password.");
             }
           }
-        } ;
-        xhr . send ( JSON . stringify ( { nom d' utilisateur : nom d' utilisateur ,  mot de passe : mot de passe } ) ) ;
+        };
+        xhr.send(JSON.stringify({username: username, password: password}));
       }
-    </script> _ _
-  </ corps >
+    </script>
+  </body>
 </html>
